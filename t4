@@ -1,0 +1,29 @@
+le do ficheiro e poe no array as palavras tratadas. 
+A ideia seria,quando for ler uma frase inteira, tratar palavra a palavra sem a guardar e comparar com o array! Fazer as respetivas atribuições ao wordfreq! guardar o numero da linha!
+
+void get_words(FILE* fpRead, char* word_save){
+	char * word=malloc(sizeof(char));
+	size_t n ;
+	
+	while(getline(&word,&n,fpRead) != -1){
+		
+		lineSplitFirst(word);
+		if(*word == '\n') continue;
+		normalize(word);
+		strcpy(word_save, word);
+		word_save_counter++;
+		printf("Word = %s\n", word_save);
+		if(strcmp(word, "\n")==0) continue;
+		while(word != NULL){
+			
+			word= lineSplitNext();
+			if(word == NULL) continue;
+			normalize(word);
+			if(*word == '\n') continue;
+			strcpy(word_save, word);
+			word_save_counter++;
+			printf("Word = %s\n", word_save);
+		}
+		
+	}
+}
